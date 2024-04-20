@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Hacking Chatbot</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="hacker-logo-simple-minimal-illustration-vector.jpg" alt="Hacker Logo">
+            <h1>Code-Cipher Ethical Hacking Chatbot</h1>
+        </header>
+        <div class="chat-container">
+            <div class="chat-log" id="chat-log"></div>
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+                <button id="speak-btn">Speak</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-btn');
+        const speakButton = document.getElementById('speak-btn');
+
+        // Event listener for sending messages
+        sendButton.addEventListener('click', sendMessage);
+
+        // Function to send user message and get bot reply
+        function sendMessage() {
+            const userMessage = userInput.value;
+            displayMessage(userMessage, 'user');
+            const botReply = getBotReply(userMessage); // Retrieve bot's reply
+            displayMessage(botReply, 'bot'); // Display bot's reply
+            userInput.value = '';
+        }
+
+        // Event listener for speaking messages
+        speakButton.addEventListener('click', speakLastMessage);
+
+        // Function to display messages in the chat log
+        function displayMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = message; // Use innerHTML instead of textContent
+            messageElement.classList.add(`${sender}-message`);
+            chatLog.appendChild(messageElement);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+        function getBotReply(userMessage) {
+    const lowerCaseMessage = userMessage.toLowerCase();
+    let botReply = '';
+    if (lowerCaseMessage.includes('mac spoofing')) {
+        botReply = 'Mac spoofing is a technique where a person changes the Media Access Control (MAC) address of their network interface to impersonate another device on a network.';
+    } else if (lowerCaseMessage.includes('mac address')) {
+        botReply = 'A MAC address is a unique identifier assigned to a network interface controller (NIC) for use as a network address.';
+    } else if (lowerCaseMessage.includes('ip')) {
+        botReply = 'An IP address is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication.';
+    } else if (lowerCaseMessage.includes('change mac in kali')) {
+        botReply = `Follow the steps and run the given commands:<br><br>1) ifconfig<br>2) sudo ifconfig eth0 down<br>3) enter your kali password<br>4) sudo ifconfig eth0 hw ether 00:11:22:33:44:55<br>5) sudo ifconfig eth0 up<br><br>Here 'hw' stands for hardware interface and '00:11:22:33:44:55' is the fake MAC that we have given to change the MAC. The MAC address will be changed to this given random address.`;
+    } else if (lowerCaseMessage.includes('footprinting')) {
+        botReply = 'Footprinting, also known as reconnaissance, is the process of gathering essential information about a target, such as a computer system or network, to prepare for a cyber attack. This information includes domain names, IP addresses, phone numbers, email addresses, and more.';
+    } else if (lowerCaseMessage.includes('online tools to gather information')) {
+        botReply = 'Here are some online tools to gather information:<br><br>1) <a href="https://archive.org">Archive.org</a><br>2) <a href="https://who.is">Who.is</a><br>3) <a href="https://pipl.com">Pipl.com</a><br>4) <a href="https://insecam.org">Insecam.org</a><br>5) <a href="https://exploit-db.com">Exploit-DB.com</a><br>6) Online Email Tracer';
+    } else if (lowerCaseMessage.includes('archive')) {
+        botReply = 'The Wayback Machine is primarily used to browse historical snapshots of websites. It allows users to see how a particular website looked at different points in the past. It\'s a valuable tool for research, web development, and investigating the evolution of websites over time.';
+    } else if (lowerCaseMessage.includes('whois')) {
+        botReply = 'Whois services like who.is provide details about a website\'s domain registration, including owner contact info, registration dates, and name servers. Users use it to contact domain owners, verify website legitimacy, and investigate domain-related issues like spamming. It helps users make informed decisions and navigate the online landscape effectively.';
+    } else if (lowerCaseMessage.includes('insecam')) {
+        botReply = 'Insecam.org is a website that displayed unsecured webcam feeds without consent, drawing criticism for privacy violations and ethical concerns. Many called for its shutdown due to the risks of exposing private camera feeds to the public.';
+    } else if (lowerCaseMessage.includes('exploit-db')) {
+        botReply = 'Exploit-DB.com is a website that hosts a collection of security exploits and vulnerabilities. It provides researchers and professionals with access to exploit code and advisories for testing and defense purposes.';
+    } else if (lowerCaseMessage.includes('online email tracer')) {
+        botReply = 'Online Email Tracer is a tool used to identify the sender of an email. By analyzing the email header, it provides details such as the sender\'s IP address, mail server information, and service provider. While it traces up to the Internet Service Provider level, further investigation typically involves cooperation with ISPs and law enforcement agencies, using message IDs for mail log analysis.';
+    } else if (lowerCaseMessage.includes('nmap zenmap') || lowerCaseMessage.includes('zenmap')) {
+        botReply = 'NMAP and ZenMAP are essential tools in Ethical Hacking with Kali Linux. They facilitate network scanning, with NMAP being command-line based and ZenMAP offering a GUI. NMAP is invaluable for network discovery and security auditing, while also serving tasks like network inventory and service monitoring for administrators.';
+    } else if (lowerCaseMessage.includes('network scanning with nmap')) {
+        botReply = 'Detecting OS Type/Version:<br>To identify the OS type/version of the target host, we\'ll use the "-O" parameter. The command is:<br>nmap -O 192.168.1.101<br>Scanning Open TCP Ports:<br>To scan all open TCP ports, use the command:<br>nmap -p 1-65535 -T4 192.168.1.101<br>This command scans all TCP ports (1-65535) with a moderate scanning speed ("-T4").';
+    } else if (lowerCaseMessage.includes('conducting stealth scans with nmap')) {
+        botReply = 'To perform a stealth scan (SYN scan) using NMAP, use the "-sS" parameter:<br>nmap -sS -T4 192.168.1.101<br>This command sends SYN packets to the target and analyzes the responses to determine open ports without completing the TCP three-way handshake.';
+    } else if (lowerCaseMessage.includes('dns enumeration tools')) {
+        botReply = 'DNS enumeration tools help gather information about domain names, including MX, A records, subdomains, and more.<br>1. dnsenum.pl: A Perl script for retrieving MX, A, and other records associated with a domain.<br>Usage: dnsenum domain_name<br>2. dnsmap: Tool for discovering phone numbers, contacts, and subdomains associated with a domain.<br>Usage: dnsmap domain_name';
+    } else if (lowerCaseMessage.includes('facebook web login page code')) {
+        botReply = 'Here is the link to download the Facebook web page code:<br><a href="https://drive.google.com/drive/folders/1VkXhfrCTa31YhcsvPYznp3kAazM5tq1s?usp=drive_link">Facebook Web Page Code</a>';
+    } else if (lowerCaseMessage.includes('insta login page clone')) {
+        botReply = 'Here is the link to download the Instagram login page clone:<br><a href="https://drive.google.com/drive/folders/1NSGqzfQ2eJ8IcUItTEAPaxJW6lM3J456?usp=drive_link">Instagram Login Page Clone</a>';
+    } else {
+        botReply = 'I\'m sorry, I didn\'t understand that.';
+    }
+    return botReply;
+}
+
+
+
+
+        
+        // Function to speak the last bot reply
+        function speakLastMessage() {
+            const lastBotMessage = chatLog.lastElementChild.innerText; // Get the text content of the last bot message
+            speakText(lastBotMessage); // Speak the last bot message
+        }
+
+        // Function to speak text using speech synthesis
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
